@@ -1,0 +1,5 @@
+
+/// COMANDO PARA CREAR VARIABLE DE ENTORNO.
+
+
+$ heroku config:set MONGO_URI="mongodb://javi047:sherlockip300@cafe-shard-00-00-nz7si.mongodb.net:27017,cafe-shard-00-01-nz7si.mongodb.net:27017,cafe-shard-00-02-nz7si.mongodb.net:27017/test?ssl=true&replicaSet=cafe-shard-0&authSource=admin&retryWrites=true"

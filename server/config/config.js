@@ -9,12 +9,12 @@ process.env.NODE_ENV= process.env.NODE_ENV || 'dev';
 //===================== BASE DE DATOS ==================
 let urlDB;
 
-if(process.env.NODE_ENV==='dev'){
+//if(process.env.NODE_ENV==='dev'){
 	urlDB='mongodb://localhost:27017/cafe';
-}else{
+//}else{
 
-	urlDB=process.env.MONGO_URI;
-};
+	urlDB='mongodb://javi047:sherlockip300@cafe-shard-00-00-nz7si.mongodb.net:27017,cafe-shard-00-01-nz7si.mongodb.net:27017,cafe-shard-00-02-nz7si.mongodb.net:27017/test?ssl=true&replicaSet=cafe-shard-0&authSource=admin&retryWrites=true'
+//};
 
 process.env.URLDB=urlDB;
 
