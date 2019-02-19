@@ -15,7 +15,7 @@
 // }else{
 
 // 	urlDB=process.env.MONGO_URI;
-// 	//'mongodb://javi047:sherlockip300@cafe-shard-00-00-nz7si.mongodb.net:27017,cafe-shard-00-01-nz7si.mongodb.net:27017,cafe-shard-00-02-nz7si.mongodb.net:27017/test?ssl=true&replicaSet=cafe-shard-0&authSource=admin&retryWrites=true'
+// 	//'mongodb+srv://javi047:sherlockip300@cafe-nz7si.mongodb.net/test?retryWrites=true'
 // };
 
 // process.env.URLDB=urlDB;
@@ -38,13 +38,29 @@ process.env.PORT = process.env.PORT || 3000;
 process.env.NODE_ENV = process.env.NODE_ENV || 'dev';
 
 
+
+// ============================
+//  Vencimiento del Token:
+// ============================
+//60seg
+//60min
+//24horas
+//30 dias
+process.env.CADUCIDAD_TOKEN=60*60*24*30;
+
+// ============================
+//  SEED de autenticacion:
+// ============================
+process.env.SEED= process.env.SEED||'secret';
+
+
 // ============================
 //  Base de datos
 // ============================
 let urlDB;
 
 if (process.env.NODE_ENV === 'dev') {
-    urlDB = 'mongodb://localhost:27017/cafe';
+   urlDB = 'mongodb://localhost:27017/cafe';
 } else {
     urlDB = process.env.MONGO_URI;
 }

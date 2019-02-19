@@ -2,17 +2,26 @@ const express = require('express');
 const bcrypt=require('bcrypt');
 const _=require('underscore');
 const Usuario=require('../models/usuario');
+//const tt= require('../middlewares/autenticacion');
+const{verificaToken,verificaAdmin_Role}=require('../middlewares/autenticacion'); //Deconstruccion
 const app = express();
 
 
 
 
-app.get('/usuario', function (req, res) {
+app.get('/usuario',verificaToken,function (req, res) {//- Sin deconstruccion seria:tt.verificaToken.
+
+  // return res.json({
+  //   usuario:req.usuario,
+  //   nombre: req.usuario.nombre,
+  //   email:req.usuario.email,
+  // });
 
   let desde=req.query.desde || 0; //sino se le da un patron, que arranque desde 0.
   desde=Number(desde);
   let limite=req.query.limite || 5;
   limite=Number(limite);
+
   //res.send('Hello World');
   //res.json('get Usuario LOCAL!');//envio en formato Json
   Usuario.find({estado:true},'nombre email role estado google img')//que se devuelvan todos los registros.
@@ -43,7 +52,7 @@ app.get('/usuario', function (req, res) {
 
 
 
-app.post('/usuario', function (req, res) {//Post se utiliza comunmente para crear registros(y PUT para actualizarlos).
+app.post('/usuario',[verificaToken, verificaAdmin_Role], function (req, res) {//Post se utiliza comunmente para crear registros(y PUT para actualizarlos).
   //res.send('Hello World');
   let body=req.body;//va a aparecer cuando sea necesario procesar las peticiones.
   
@@ -77,7 +86,7 @@ app.post('/usuario', function (req, res) {//Post se utiliza comunmente para crea
 });
   });
  
-app.put('/usuario/:id', function (req, res) {
+app.put('/usuario/:id',[verificaToken, verificaAdmin_Role], function (req, res) {
 
 	let id=req.params.id;//el nombre de la variable no es el id en si.
   let body=_.pick(req.body,['nombre','email','img','role','estado']);
@@ -106,7 +115,7 @@ app.put('/usuario/:id', function (req, res) {
 let cambiaEstado={
   estado:false
 };
-app.delete('/usuario/:id', function (req, res) {
+app.delete('/usuario/:id',[verificaToken, verificaAdmin_Role], function (req, res) {
   //res.send('Hello World');
   //res.json('Delete Usuario');//envio en formato Json.
   let id=req.params.id;
