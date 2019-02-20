@@ -2,9 +2,17 @@ require('./config/config');//al ser en primer archivo en ejecucion va a configur
 
 const express = require('express');
 const mongoose = require('mongoose');
+const path=require('path');
 const app = express();
 
 const bodyParser = require('body-parser');
+
+//Habilitar carpeta Public: 'path.resolve' estructura la direccion de la carpeta public y limpia errores.
+app.use(express.static(path.resolve(__dirname,'../public')));
+console.log(path.resolve(__dirname,'../public'));
+
+
+
 // parse application/x-www-form-urlencoded
 app.use(bodyParser.urlencoded({ extended: false }))
  
