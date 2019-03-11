@@ -115,6 +115,7 @@ app.put('/usuario/:id',[verificaToken, verificaAdmin_Role], function (req, res) 
 let cambiaEstado={
   estado:false
 };
+
 app.delete('/usuario/:id',[verificaToken, verificaAdmin_Role], function (req, res) {
   //res.send('Hello World');
   //res.json('Delete Usuario');//envio en formato Json.

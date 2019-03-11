@@ -9,7 +9,7 @@ const bodyParser = require('body-parser');
 
 //Habilitar carpeta Public: 'path.resolve' estructura la direccion de la carpeta public y limpia errores.
 app.use(express.static(path.resolve(__dirname,'../public')));
-console.log(path.resolve(__dirname,'../public'));
+//console.log(path.resolve(__dirname,'../public'));
 
 
 
@@ -20,10 +20,11 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json());
 
 //app.use(require('./routes/usuario'));//Importo las rutas.
+
 app.use(require('./routes/index'));//Configuracion global de rutas.
  
 
-mongoose.connect(process.env.URLDB,(err,res)=>{
+mongoose.connect(process.env.URLDB, { useNewUrlParser: true },(err,res)=>{
 	if(err) throw err;
 
 	console.log('Base de datos ONLINE');
